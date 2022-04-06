@@ -1,0 +1,6 @@
+D:\02 GameDev\Tanks-Physics\Week2_assignment_start\Tank\bin\Debug\Tank.exe
+D:\02 GameDev\Tanks-Physics\Week2_assignment_start\Tank\bin\Debug\Tank.pdb
+D:\02 GameDev\Tanks-Physics\Week2_assignment_start\Tank\obj\x86\Debug\Tank.csproj.AssemblyReference.cache
+D:\02 GameDev\Tanks-Physics\Week2_assignment_start\Tank\obj\x86\Debug\Tank.csproj.CoreCompileInputs.cache
+D:\02 GameDev\Tanks-Physics\Week2_assignment_start\Tank\obj\x86\Debug\Tank.exe
+D:\02 GameDev\Tanks-Physics\Week2_assignment_start\Tank\obj\x86\Debug\Tank.pdb
