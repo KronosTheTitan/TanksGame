@@ -11,7 +11,7 @@ public class MyGame : Game
 		new MyGame().Start();
 	}
 
-	public MyGame () : base(800, 600, false,false)
+	public MyGame () : base(1600, 900, false,false)
 	{
 		activeScene = this;
 		// background:
