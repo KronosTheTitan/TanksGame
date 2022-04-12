@@ -1,7 +1,8 @@
 ﻿using GXPEngine;
 
-class Bullet : Sprite 
+public class Bullet : Sprite 
 {
+
 	// public fields & properties:
 	public Vec2 position 
 	{
@@ -12,6 +13,8 @@ class Bullet : Sprite
 	}
 	public Vec2 velocity;
 
+	public float radius;
+
 	// private fields:
 	Vec2 _position;
 
@@ -19,7 +22,9 @@ class Bullet : Sprite
 	{
 		_position = pPosition;
 		velocity = pVelocity;
+		rotation = velocity.GetAngleDegrees();
 		SetOrigin(width / 2, height / 2);
+		radius = height / 2;
 	}
 
 	void UpdateScreenPosition() 
@@ -28,7 +33,7 @@ class Bullet : Sprite
 		y = _position.y;
 	}
 
-	public void Update() 
+	void Update() 
 	{
 		_position += velocity;
 		UpdateScreenPosition ();

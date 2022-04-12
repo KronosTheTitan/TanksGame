@@ -44,6 +44,18 @@ public struct Vec2
 		return Mathf.Sqrt((x * x) + (y * y));
 	}
 
+	public float Dot(Vec2 other)
+	{
+		return x * other.x + y * other.y;
+	}
+
+	public Vec2 Normal()
+	{
+		Vec2 output = new Vec2(x * 0 - y * 1, x * 1 + y * 0);
+		output.Normalize();
+		return output;
+	}
+
 	// TODO: Implement subtract, scale operators
 
 	public static Vec2 operator +(Vec2 left, Vec2 right)

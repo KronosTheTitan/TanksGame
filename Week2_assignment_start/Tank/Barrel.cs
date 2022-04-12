@@ -32,8 +32,7 @@ class Barrel : Sprite
 			lastShot = Time.time;
 			Vec2 dir = Vec2.GetUnitVectorDeg(parent.rotation+rotation);
 			dir = dir.Normalized() * 5;
-			Bullet bullet = new Bullet(new Vec2(parent.x-x,parent.y-y)+dir,dir);
-			bullet.rotation = parent.rotation+rotation;
+			Bullet bullet = new Bullet(new Vec2(parent.x-x,parent.y-y),dir);
 			MyGame.activeScene.AddChild(bullet);
 		}
 	}
