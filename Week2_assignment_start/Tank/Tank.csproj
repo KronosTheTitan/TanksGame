@@ -36,8 +36,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AITank.cs" />
     <Compile Include="Barrel.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="Components\Arrow.cs" />
+    <Compile Include="Components\LineSegment.cs" />
+    <Compile Include="Components\NLineSegment.cs" />
+    <Compile Include="TankArmour.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="Tank.cs" />
     <Compile Include="UnitTests.cs" />

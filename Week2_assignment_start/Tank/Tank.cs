@@ -1,7 +1,7 @@
 ﻿using GXPEngine;
 
 // TODO: Fix this mess! - see Assignment 2.2
-class Tank : Sprite 
+public class Tank : AITank 
 {
 	// public fields & properties:
 	public Vec2 position 
@@ -17,7 +17,7 @@ class Tank : Sprite
 	Vec2 _position;
 	Barrel _barrel;
 
-	public Tank(float px, float py) : base("assets/bodies/t34.png") 
+	public Tank(float px, float py) : base(px,py) 
 	{
 		_position.x = px;
 		_position.y = py;
@@ -52,8 +52,9 @@ class Tank : Sprite
 		y = _position.y;
 	}
 
-	public void Update() 
+	public override void Update() 
 	{
+		base.Update();
 		velocity *= 0.2f;
 		Controls ();
 		// Basic Euler integration:

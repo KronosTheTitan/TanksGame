@@ -13,13 +13,19 @@ public class MyGame : Game
 		new MyGame().Start();
 	}
 
+	Bullet _ball;
+
+	EasyDraw _text;
+
+	NLineSegment _lineSegment;
+
 	public MyGame () : base(1600, 900, false,false)
 	{
 		UnitTests.RunTests();
 		activeScene = this;
-		// background:
-		AddChild (new Sprite ("assets/desert.png"));
 		// tank:
-		AddChild (new Tank (width / 2, height / 2));
+		Tank tank = new Tank(width / 2, height / 2);
+		AddChild (tank);
+		AddChild(new AITank(width / 4, height / 4));
 	}
 }
