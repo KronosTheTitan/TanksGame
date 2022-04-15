@@ -37,44 +37,60 @@ class UnitTests
 		// test Vec2.GetUnitVectorDegrees
 		Vec2 v = Vec2.GetUnitVectorDeg(180f);
 		v.Normalize();
-		Console.WriteLine("GetUnitVectorDegrees : " + (Approximate(v, new Vec2(-1, 0))) + " " + v.ToString());
+		Console.WriteLine("GetUnitVectorDegrees : " + (Approximate(v, new Vec2(-1, 0))));
 		// test Vec2.GetUnitVectorRadiansv = Vec2.GetUnitVectorRad(1);
 		v = Vec2.GetUnitVectorRad(0.5f * Mathf.PI);
 		v.Normalize();
-		Console.WriteLine("GetUnitVectorRadians : " + (Approximate(v, new Vec2(0, 1))) + " " + v.ToString());
+		Console.WriteLine("GetUnitVectorRadians : " + (Approximate(v, new Vec2(0, 1))));
 
 		// Week 2 instance:
 
 		// test v.GetAngleDegrees
 		v = new Vec2(5, 5);
-		Console.WriteLine("GetAngleDegrees : " + (Approximate(v.GetAngleDegrees(), 45f)) + " " + v.GetAngleDegrees());
+		Console.WriteLine("GetAngleDegrees : " + (Approximate(v.GetAngleDegrees(), 45f)));
 		// test v.GetAngleRadians
 		v = new Vec2(0, 5);
-		Console.WriteLine("GetAngleRadians : " + (Approximate(v.GetAngleRadians(), 0.5f * Mathf.PI)) + " " + v.GetAngleRadians());
+		Console.WriteLine("GetAngleRadians : " + (Approximate(v.GetAngleRadians(), 0.5f * Mathf.PI)));
 		// test v.SetAngleDegrees
 		v = new Vec2(1, 0);
 		v.SetAngleDegrees(90f);
-		Console.WriteLine("SetAngleDegrees : " + (Approximate(v, new Vec2(0, 1))) + " " + v.ToString());
+		Console.WriteLine("SetAngleDegrees : " + (Approximate(v, new Vec2(0, 1))));
 		// test v.SetAngleRadians
 		v.SetAngleRadians(1 * Mathf.PI);
-		Console.WriteLine("SetAngleRadians : " + (Approximate(v, new Vec2(-1, 0))) + " " + v.ToString());
+		Console.WriteLine("SetAngleRadians : " + (Approximate(v, new Vec2(-1, 0))));
 
 		// test v.RotateDegrees
 		v = new Vec2(10, 0);
 		v.RotateDegrees(90);
-		Console.WriteLine("RotateDegrees : " + Approximate(v, new Vec2(0, 10)) + " " + v.ToString());
+		Console.WriteLine("RotateDegrees : " + Approximate(v, new Vec2(0, 10)));
 		// test v.RotateRadians
 		v = new Vec2(10, 0);
 		v.RotateRadians(1f * Mathf.PI);
-		Console.WriteLine("RotateRadians : " + Approximate(v, new Vec2(-10, 0)) + " " + v.ToString());
+		Console.WriteLine("RotateRadians : " + Approximate(v, new Vec2(-10, 0)));
 		// test v.RotateAroundDegrees
 		v.SetXY(1, 0);
 		v.RotateAroundDegrees(new Vec2(1, 1), 90f);
-		Console.WriteLine("RotateAroundDegrees : " + Approximate(v, new Vec2(2, 1)) + " " + v.ToString());
+		Console.WriteLine("RotateAroundDegrees : " + Approximate(v, new Vec2(2, 1)));
 		// test v.
 		v.SetXY(1, 0);
 		v.RotateAroundRadians(new Vec2(1, 1), 0.5f * Mathf.PI);
-		Console.WriteLine("RotateAroundRadians : " + Approximate(v, new Vec2(2, 1)) + " " + v.ToString());
+		Console.WriteLine("RotateAroundRadians : " + Approximate(v, new Vec2(2, 1)));
+
+		Vec2 v1 = new Vec2(1, 0).Normal();
+
+		Console.WriteLine("Normal : "+(v1.x==0&&v1.y==1));
+
+		Vec2 v2 = new Vec2(1, 0);
+		Vec2 v3 = new Vec2(0, 1);
+
+		Console.WriteLine("Dot : "+(v2.Dot(v3)==0));
+
+		Vec2 v4 = new Vec2(3,-3);
+		Vec2 v5 = new Vec2(0, 1);
+
+		v4 = v4.Reflect(v5);
+
+		Console.WriteLine("Reflect : "+(v4.x ==3&&v4.y==3));
 
 	}
 	public static bool Approximate(Vec2 a, Vec2 b, float errorMargin = 0.01f)

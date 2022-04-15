@@ -54,43 +54,60 @@ public class AITank : Sprite
 			game.RemoveChild(nLine);
 		Vec2[] corners = GetExtentsVec2();
 		nLines = new NLineSegment[]{
-			new NLineSegment(corners[0],corners[1]),
-			new NLineSegment(corners[1],corners[2]),
-			new NLineSegment(corners[2],corners[3]),
-			new NLineSegment(corners[3],corners[0])
+			new NLineSegment(corners[1],corners[0]),
+			new NLineSegment(corners[0],corners[3]),
+			new NLineSegment(corners[3],corners[2]),
+			new NLineSegment(corners[2],corners[1])
 		};
 		foreach (NLineSegment nLine in nLines)
 			game.AddChild(nLine);
 
 		foreach (Bullet bullet in MyGame.activeScene.bullets)
 		{
-			foreach(NLineSegment nLine in nLines)
+			if(bullet.origin != this)
 			{
-				Vec2 bulletToLine = bullet.position - nLine.start;
-				float bulletDistanceNew = bulletToLine.Dot((nLine.end - nLine.start).Normal());
-				Vec2 bulletToLineOld = bullet.oldPosition - nLine.start;
-				float bulletDistanceOld = bulletToLineOld.Dot((nLine.end - nLine.start).Normal());
-                if (bulletDistanceOld - bullet.radius > 0 && bulletDistanceNew - bullet.radius < 0 && bullet.origin!=this)
-                {
-					float a = bulletDistanceOld - bullet.radius;
-					float b = bulletDistanceOld +(bulletDistanceNew>0 ? bulletDistanceNew : (bulletDistanceNew*-1));
-					float t = a/b;
-					Vec2 desiredPos = bullet.oldPosition + (bullet.velocity * t);
-					Vec2 lineVector = nLine.end - nLine.start;
-					float lineLength = lineVector.Length();
-					bulletToLine = nLine.start - desiredPos;
-					float dotProduct = bulletToLine.Dot(lineVector.Normal());
-                    if (dotProduct > 0 && dotProduct < lineLength)
-					{						
-						Console.WriteLine("Hit! at : " + bullet._position.ToString());
-						bullet.velocity = velocity - (1 + 0.99f) * velocity.Normal() * (nLine.end - nLine.start).Normal();
-						bullet._position = desiredPos; 
+				foreach (NLineSegment nLine in nLines)
+				{
+					Vec2 ltb = bullet.position - nLine.start;
+					float ballDistance = ltb.Dot((nLine.end - nLine.start).Normal());   //HINT: it's NOT 10000
+
+					//compare distance with ball radius
+					if (ballDistance < bullet.radius)
+					{
+						float a = (bullet.oldPosition - nLine.start).Dot((nLine.end - nLine.start).Normal()) - bullet.radius;
+						float b = -bullet.velocity.Dot((nLine.end - nLine.start).Normal());
+						float t = a / b;
+						//bullet.position = bullet.oldPosition + (bullet.velocity * t);
+						Vec2 desiredPos = bullet.oldPosition + (bullet.velocity * t);
+						Vec2 lineVector = nLine.end - nLine.start;
+						float lineLength = lineVector.Length();
+						Vec2 bulletToLine = desiredPos - nLine.start;
+						float dotProduct = bulletToLine.Dot(lineVector.Normalized());
+						if (dotProduct > 0 && dotProduct < lineLength && !(b <= 0 && a < 0))
+						{
+							bullet.SetColor(1, 0, 0);
+							bullet._position = desiredPos;
+							bullet.velocity = bullet.velocity.Reflect((nLine.end - nLine.start).Normal(), 1f);
+                            //if (notbounce)
+							//{
+							//	LateDestroy();
+							//	bullet.LateDestroy();
+							//}
+							bullet.rotation = bullet.velocity.GetAngleDegrees();
+							Console.WriteLine(t + " : " + bullet.velocity.ToString()+" : "+MyGame.activeScene.bullets.Count);
+							bullet._position = bullet.oldPosition + (bullet.velocity * (1 - t));
+
+						}
+						else
+						{
+							bullet._position = bullet.oldPosition + bullet.velocity;
+						}
 					}
 					else
 					{
-						bullet._position = bullet.oldPosition + bullet.velocity;
+						bullet.SetColor(0, 1, 0);
 					}
-                }
+				}
 			}			
 		}
 	}
