@@ -55,6 +55,10 @@ public struct Vec2
 		output.Normalize();
 		return output;
 	}
+	public Vec2 Reflect(Vec2 pNormal, float pBounciness = 1)
+    {
+		return this - (1 + pBounciness) * Dot(pNormal) * pNormal;
+	}
 
 	// TODO: Implement subtract, scale operators
 
